@@ -1,0 +1,89 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "test",
+      "password": "test123"
+    },
+    {
+      "id": 2,
+      "username": "demo",
+      "password": "demo123"
+    }
+  ],
+  "expenses": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Migros Einkauf",
+      "amount": 55.57,
+      "category": "Nahrung",
+      "date": "2025-12-06",
+      "description": "Aktualisierte Ausgabe",
+      "createdAt": "2025-12-11"
+    },
+    {
+      "id": 4,
+      "userId": 1,
+      "title": "Coop Einkauf",
+      "amount": 23.8,
+      "category": "Nahrung",
+      "date": "2025-12-03",
+      "description": "Frühstück und Snacks",
+      "createdAt": "2025-12-11"
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "title": "Amazon Bestellung",
+      "amount": 67,
+      "category": "Shoppen",
+      "date": "2025-11-28",
+      "description": "Kopfhörer und USB-Kabel",
+      "createdAt": "2025-12-11"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Nahrung",
+      "color": "#FF6B6B"
+    },
+    {
+      "id": 2,
+      "name": "Transport",
+      "color": "#4ECDC4"
+    },
+    {
+      "id": 3,
+      "name": "Unterkunft",
+      "color": "#45B7D1"
+    },
+    {
+      "id": 4,
+      "name": "Unterhaltung",
+      "color": "#A78BFA"
+    },
+    {
+      "id": 5,
+      "name": "Shoppen",
+      "color": "#FDE68A"
+    },
+    {
+      "id": 6,
+      "name": "Gesundheit/Hygiene",
+      "color": "#F472B6"
+    },
+    {
+      "id": 7,
+      "name": "Bildung",
+      "color": "#60A5FA"
+    },
+    {
+      "id": 8,
+      "name": "Sonstiges",
+      "color": "#94A3B8"
+    }
+  ],
+  "sessions": []
+}
