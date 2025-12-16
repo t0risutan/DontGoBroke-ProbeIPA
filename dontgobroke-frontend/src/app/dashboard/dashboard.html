@@ -1,8 +1,38 @@
 <router-outlet></router-outlet>
 
 <header>
-    <h1>DontGoBroke!</h1>
+    <h1>DontGoBroke!</h1>      
+    <button (click)="openExpenseform()" matButton="elevated" class="new-expense-button">+New Expense</button>
 </header>
-<div>
-    <p>dashboard works!</p>
+
+<div class="wrapper">
+    <div class="expense-banner">
+        <div class="expense-banner-content">
+            <h2>Expense Banner</h2>
+            <p>This is the expense banner</p>
+        </div>
+    </div>
+    <div class="statistic-container">
+        <div class="expense-charts">
+            <div class="expense-chart-content">
+                <h2>Expense Chart</h2>
+                <p>This is the expense chart</p>
+            </div>
+        </div>
+        <div class="expense-breakdown">
+            <div class="expense-breakdown-content">
+                <h2>Expense Breakdown</h2>
+                <p>This is the expense breakdown</p>
+            </div>
+        </div>
+    </div>
+    <div class="recent-transactions">
+        <div class="recent-transactions-content">
+            <li>Transaction 1</li>
+            <li>Transaction 2</li>
+            <li>Transaction 3</li>
+            <li>Transaction 4</li>
+            <li>Transaction 5</li>
+        </div>
+    </div>
 </div>
