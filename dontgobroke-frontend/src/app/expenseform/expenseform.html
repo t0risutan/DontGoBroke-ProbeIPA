@@ -2,8 +2,28 @@
     <h2>New Expense</h2>
     <form>
         <mat-form-field>
-            <input matInput placeholder="Title"/>
-            <a> description</a>
+            <mat-label>Betrag</mat-label>
+            <input matInput placeholder="Betrag"/>
         </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kategorie</mat-label>
+            <mat-select>
+                <mat-option value="one">Nahrung</mat-option>
+                <mat-option value="two">Transport</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Datum</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Beschreibung</mat-label>
+            <textarea matInput placeholder="Beschreibung"></textarea>
+        </mat-form-field>
+        <!-- <button mat-button (click)="close()">Abbrechen</button>
+        <button mat-button (click)="save()">Speichern</button> -->
     </form>
 </mat-dialog-content>
