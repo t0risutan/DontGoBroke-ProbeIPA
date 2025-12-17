@@ -28,11 +28,24 @@
     </div>
     <div class="recent-transactions">
         <div class="recent-transactions-content">
-            <li>Transaction 1</li>
-            <li>Transaction 2</li>
-            <li>Transaction 3</li>
-            <li>Transaction 4</li>
-            <li>Transaction 5</li>
+            <mat-list>
+                <mat-list-item *ngFor="let expense of expenses()">
+                    <mat-card>
+                        <mat-card-header>{{ expense.title }}</mat-card-header> 
+                        <mat-card-content><p>{{ expense.amount }} CHF</p></mat-card-content>
+                        <mat-card-content><p>{{ expense.category }}</p></mat-card-content>
+                        <mat-card-content><p>{{ expense.date }}</p></mat-card-content>
+                        <mat-card-content><p>{{ expense.description }}</p></mat-card-content>
+                    </mat-card>
+                </mat-list-item>
+            </mat-list>
+            <!-- <li *ngFor="let expense of expenses()">
+                {{ expense.title }} - 
+                {{ expense.amount }} - 
+                {{ expense.category }} - 
+                {{ expense.date }} - 
+                {{ expense.description }}
+            </li> -->
         </div>
     </div>
 </div>

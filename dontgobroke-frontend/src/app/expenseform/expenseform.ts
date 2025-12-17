@@ -12,16 +12,15 @@ import {
 import { MatFormFieldModule, MatFormFieldControl } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { ExpenseCreateDto } from '../../models/expense-dto';
+import { ExpenseFormService } from '../../services/expense-form-service';
+import { FormsModule } from '@angular/forms';
 
-// interface to represent the form data that is passed to the dialog
-
-export interface ExpenseformData {
-  title: string;
-  description: string;
-}
+// Ist wie das Data Transfer Object (DTO) für das Ausgabenformular
 
 @Component({
   selector: 'app-expenseform',
@@ -35,19 +34,38 @@ export interface ExpenseformData {
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatButtonModule,  
+    FormsModule
   ],
   templateUrl: './expenseform.html',
   styleUrl: './expenseform.css',
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter()] ,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
-// injection of form data from the dialog
+// Injection der Formulardaten aus dem Dialog
 
 export class Expenseform {
   readonly dialogRef = inject(MatDialogRef<Expenseform>);
-  readonly data = inject<ExpenseformData>(MAT_DIALOG_DATA);
+  readonly data = inject<ExpenseCreateDto>(MAT_DIALOG_DATA);
+  private expenseFormService = inject(ExpenseFormService);
+
+
+  expenseForm: ExpenseCreateDto = {
+    title: this.data.title,
+    amount: this.data.amount,
+    category: this.data.category,
+    date: this.data.date,
+    description: this.data.description,
+    createdAt: new Date()
+  };
+
+  save(): void {
+    this.expenseFormService.createExpense(this.expenseForm).subscribe((result) => {
+      console.log(result);
+    });
+  }
 
   close(): void {
     this.dialogRef.close();
