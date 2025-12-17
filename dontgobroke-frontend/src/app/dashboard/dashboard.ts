@@ -6,11 +6,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Expenseform } from '../expenseform/expenseform';
 import { CommonModule } from '@angular/common';
 import { inject } from '@angular/core';
-import { DashboardService } from '../../services/dashboard-service';
 import { ExpenseDto } from '../../models/expense-dto';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
-
+import { ExpenseFormService } from '../../services/expense-form-service';
+import { DashboardService } from '../../services/dashboard-service';
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -28,9 +28,12 @@ import { MatListModule } from '@angular/material/list';
 export class Dashboard {
   private dialog = inject(MatDialog);
   private dashboardService = inject(DashboardService);
-
+  private expenseFormService = inject(ExpenseFormService);
   // Zuständig für das Abrufen der Ausgaben
+  
   expenses = this.dashboardService.getExpenses();
+  deleteExpense = this.expenseFormService.deleteExpense;
+
 
   // Zuständig für das Öffnen des Ausgabenformulars
   openExpenseform(): void {

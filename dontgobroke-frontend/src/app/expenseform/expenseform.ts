@@ -61,8 +61,10 @@ export class Expenseform {
     createdAt: new Date()
   };
 
+  // Nach dem Speichern, sollte das Formular geschlossen werden, sowie wie die Seite neu geladen werden.
   save(): void {
     this.expenseFormService.createExpense(this.expenseForm).subscribe((result) => {
+      this.dialogRef.close(result);
       console.log(result);
     });
   }
