@@ -18,12 +18,13 @@ export interface ExpenseCreateDto {
     createdAt: Date
 }
 
-export interface ExpenseUpdateDto {
-    id: number
+export interface ExpenseDeleteDto {
+    id: string
     userId: number
     title: string
     amount: number
     category: string
     date: Date
     description: string
+    createdAt: Date
 }

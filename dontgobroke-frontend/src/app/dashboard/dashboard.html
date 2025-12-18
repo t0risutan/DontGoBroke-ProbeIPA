@@ -36,17 +36,11 @@
                         <mat-card-content><p>{{ expense.category }}</p></mat-card-content>
                         <mat-card-content><p>{{ expense.date }}</p></mat-card-content>
                         <mat-card-content><p>{{ expense.description }}</p></mat-card-content>
-                        <button (click)="deleteExpense(expense.title)" matButton="elevated">Delete</button>
+                        <button (click)="triggerDeleteExpense(expense.id.toString())" matButton="elevated">Delete</button>
+                        <button (click)="triggerEditExpense(expense)" matButton="elevated">Edit</button>
                     </mat-card>
                 </mat-list-item>
             </mat-list>
-            <!-- <li *ngFor="let expense of expenses()">
-                {{ expense.title }} - 
-                {{ expense.amount }} - 
-                {{ expense.category }} - 
-                {{ expense.date }} - 
-                {{ expense.description }}
-            </li> -->
         </div>
     </div>
 </div>

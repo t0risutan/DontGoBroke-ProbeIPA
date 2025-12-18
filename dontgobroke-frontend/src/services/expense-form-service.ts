@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { ExpenseCreateDto, ExpenseDto } from '../models/expense-dto';
+import { ExpenseCreateDto, ExpenseDeleteDto, ExpenseDto } from '../models/expense-dto';
 import { HttpClient } from '@angular/common/http';
 import { map, switchMap } from 'rxjs/operators';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -11,16 +12,22 @@ export class ExpenseFormService {
   private apiUrl = 'http://localhost:3000/expenses';
 
   getExpenses() {
-    return this.http.get<ExpenseDto[]>(this.apiUrl);
+    return toSignal(this.http.get<ExpenseDto[]>(this.apiUrl));
   }
 
-  createExpense(expense: ExpenseCreateDto) {
+  postExpense(expense: ExpenseCreateDto) {
     return this.http.post<ExpenseCreateDto>(this.apiUrl, expense);
   }
 
-  deleteExpense(title: string) {
-    return this.http.delete<ExpenseDto>(`${this.apiUrl}/${title}`);
+  deleteExpense(id: string) {
+    return this.http.delete<ExpenseDeleteDto>(`${this.apiUrl}/${id}`);
   }
+  
+  putExpense(expense: ExpenseDto) {
+    return this.http.put<ExpenseDto>(`${this.apiUrl}/${expense.id}`, expense);
+  }
+
+  
 
   // Die Funktion holt alle Ausgaben der Datenbank damit diese weiss,
   // welche die höchste ID ist und addiert +1 bei der ID, jeder neuen Ausgabe.

@@ -34,6 +34,7 @@
             <textarea matInput type="text" placeholder="Beschreibung" [(ngModel)]="expenseForm.description" name="description"></textarea>
         </mat-form-field>
         <button (click)="close()" mat-button="elevated">Abbrechen</button>
-        <button (click)="save()" mat-button="elevated">Speichern</button>
+        <button (click)="save()" mat-button="elevated" class="save-button">Speichern</button>
+        <!-- <button (click)="update()" mat-button="elevated" class="update-button">Aktualisieren</button> -->
     </form>
 </mat-dialog-content>

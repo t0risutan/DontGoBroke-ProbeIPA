@@ -16,10 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { provideNativeDateAdapter} from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { ExpenseCreateDto } from '../../models/expense-dto';
+import { ExpenseCreateDto, ExpenseDto } from '../../models/expense-dto';
 import { ExpenseFormService } from '../../services/expense-form-service';
 import { FormsModule } from '@angular/forms';
-
+import { MatDialog } from '@angular/material/dialog';
 // Ist wie das Data Transfer Object (DTO) für das Ausgabenformular
 
 @Component({
@@ -50,6 +50,7 @@ export class Expenseform {
   readonly dialogRef = inject(MatDialogRef<Expenseform>);
   readonly data = inject<ExpenseCreateDto>(MAT_DIALOG_DATA);
   private expenseFormService = inject(ExpenseFormService);
+  private dialog = inject(MatDialog);
 
 
   expenseForm: ExpenseCreateDto = {
@@ -63,10 +64,18 @@ export class Expenseform {
 
   // Nach dem Speichern, sollte das Formular geschlossen werden, sowie wie die Seite neu geladen werden.
   save(): void {
-    this.expenseFormService.createExpense(this.expenseForm).subscribe((result) => {
+      this.expenseFormService.postExpense(this.expenseForm).subscribe((result) => {
       this.dialogRef.close(result);
       console.log(result);
     });
+  }
+
+  // funktioniert momentan nicht, wegen der inkompatiblen DTO's "this.expenseForm"
+  update(): void {
+    // this.expenseFormService.putExpense(this.expenseForm).subscribe((result) => {
+    //   this.dialogRef.close(result);
+    //   console.log(result);
+    // });
   }
 
   close(): void {
