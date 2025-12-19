@@ -23,30 +23,9 @@ export class ExpenseFormService {
     return this.http.delete<ExpenseDeleteDto>(`${this.apiUrl}/${id}`);
   }
   
+  // Schliesst die id aus, damit diese nicht zwei mal geschickt wird.
   putExpense(expense: ExpenseDto) {
-    return this.http.put<ExpenseDto>(`${this.apiUrl}/${expense.id}`, expense);
+    const { id, ...expenseWithoutId } = expense;
+    return this.http.put<ExpenseDto>(`${this.apiUrl}/${id}`, expenseWithoutId);
   }
-
-  
-
-  // Die Funktion holt alle Ausgaben der Datenbank damit diese weiss,
-  // welche die höchste ID ist und addiert +1 bei der ID, jeder neuen Ausgabe.
-  
-  // Funktioniert momentan nicht wie erwartet, da die ID nicht erhöht wird und immer null ist.
-
-  // createExpense(expense: ExpenseCreateDto) {
-  //   return this.getExpenses().pipe(
-  //     map(expenses => {
-  //       const maxId = expenses.length
-  //       ? Math.max(...expenses.map(e => Number(e.id)))
-  //       : 0;
-  //       return {
-  //         ...expense,
-  //         id: maxId + 1
-  //       };
-  //     }),
-  //     switchMap(expense => 
-  //       this.http.post<ExpenseCreateDto>(this.apiUrl, expense))
-  //   );
-  // }    
 }

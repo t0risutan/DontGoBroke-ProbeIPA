@@ -1,29 +1,34 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "test",
       "password": "test123"
     },
     {
-      "id": 2,
+      "id": "2",
       "username": "demo",
       "password": "demo123"
+    },
+    {
+      "id": "3",
+      "username": "admin",
+      "password": "admin123"
     }
   ],
   "expenses": [
     {
-      "id": 1,
-      "userId": 1,
-      "title": "Migros Einkauf",
-      "amount": 55.57,
+      "userId": 0,
+      "title": "Migros Kauf",
+      "amount": 52,
       "category": "Nahrung",
       "date": "2025-12-06",
       "description": "Aktualisierte Ausgabe",
-      "createdAt": "2025-12-11"
+      "createdAt": "2025-12-19T08:53:55.534Z",
+      "id": "1"
     },
     {
-      "id": 4,
+      "id": "4",
       "userId": 1,
       "title": "Coop Einkauf",
       "amount": 23.8,
@@ -33,54 +38,54 @@
       "createdAt": "2025-12-11"
     },
     {
-      "id": 5,
-      "userId": 1,
-      "title": "Amazon Bestellung",
-      "amount": 67,
+      "id": 0,
+      "userId": 0,
+      "title": "Tag8",
+      "amount": 15,
       "category": "Shoppen",
-      "date": "2025-11-28",
-      "description": "Kopfhörer und USB-Kabel",
-      "createdAt": "2025-12-11"
+      "date": "2025-12-14T23:00:00.000Z",
+      "description": "hgjhsdydjfxgchsdxcfh",
+      "createdAt": "2025-12-19T08:57:52.407Z"
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Nahrung",
       "color": "#FF6B6B"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Transport",
       "color": "#4ECDC4"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Unterkunft",
       "color": "#45B7D1"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Unterhaltung",
       "color": "#A78BFA"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Shoppen",
       "color": "#FDE68A"
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Gesundheit/Hygiene",
       "color": "#F472B6"
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Bildung",
       "color": "#60A5FA"
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Sonstiges",
       "color": "#94A3B8"
     }

@@ -49,33 +49,34 @@ import { MatDialog } from '@angular/material/dialog';
 export class Expenseform {
   readonly dialogRef = inject(MatDialogRef<Expenseform>);
   readonly data = inject<ExpenseCreateDto>(MAT_DIALOG_DATA);
+  readonly daten = inject<ExpenseDto>(MAT_DIALOG_DATA);
   private expenseFormService = inject(ExpenseFormService);
-  private dialog = inject(MatDialog);
 
-
-  expenseForm: ExpenseCreateDto = {
-    title: this.data.title,
-    amount: this.data.amount,
-    category: this.data.category,
-    date: this.data.date,
-    description: this.data.description,
-    createdAt: new Date()
+  
+  expenseForm: ExpenseDto = {
+    id: this.daten.id || 0,
+    userId: this.daten.userId || 0,
+    title: this.data.title || '',
+    amount: this.data.amount || 0,
+    category: this.data.category || '',
+    date: this.data.date || '',
+    description: this.data.description || '',
+    createdAt: this.daten.createdAt || new Date()
   };
 
-  // Nach dem Speichern, sollte das Formular geschlossen werden, sowie wie die Seite neu geladen werden.
+  // Speicher Funktion für die Creation-Funktion und die Update-Funktion, if statement prüft ob die ID vorhanden ist.
   save(): void {
+    if (this.expenseForm.id) {
+      this.expenseFormService.putExpense(this.expenseForm).subscribe((result) => {
+        this.dialogRef.close(result);
+        console.log(result);
+      });
+    } else {
       this.expenseFormService.postExpense(this.expenseForm).subscribe((result) => {
-      this.dialogRef.close(result);
-      console.log(result);
-    });
-  }
-
-  // funktioniert momentan nicht, wegen der inkompatiblen DTO's "this.expenseForm"
-  update(): void {
-    // this.expenseFormService.putExpense(this.expenseForm).subscribe((result) => {
-    //   this.dialogRef.close(result);
-    //   console.log(result);
-    // });
+        this.dialogRef.close(result);
+        console.log(result);
+      });
+    }
   }
 
   close(): void {
