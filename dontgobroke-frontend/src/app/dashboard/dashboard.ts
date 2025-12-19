@@ -10,9 +10,8 @@ import { ExpenseDto } from '../../models/expense-dto';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 import { ExpenseFormService } from '../../services/expense-form-service';
-import { DashboardService } from '../../services/dashboard-service';
-import { Subject, Observable } from 'rxjs';
-import { startWith, switchMap } from 'rxjs/operators';
+import { ExpenseChart } from '../expense-chart/expense-chart';
+
 @Component({
   selector: 'app-dashboard',
   imports: [
@@ -22,7 +21,8 @@ import { startWith, switchMap } from 'rxjs/operators';
     MatButtonModule, 
     MatSidenavModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    ExpenseChart
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -30,7 +30,6 @@ import { startWith, switchMap } from 'rxjs/operators';
 })
 export class Dashboard {
   private dialog = inject(MatDialog);
-  private dashboardService = inject(DashboardService);
   private expenseFormService = inject(ExpenseFormService);
   // private deleteExpenseRefresh = new Subject<void>();
   // readonly expenses$ : Observable<ExpenseDto[]>;
@@ -71,7 +70,6 @@ export class Dashboard {
   // deleteExpense = this.expenseFormService.deleteExpense;
 
   // Zuständig für das Öffnen des Ausgabenformulars
-
 
   // constructor() {
   //   this.expenses$ = this.deleteExpenseRefresh.pipe(

@@ -17,7 +17,7 @@ header h1 {
 
 .wrapper {
     display: grid;
-    /* flex-direction: grid; */
+
     align-items: center;
     justify-self: center;
     justify-content: center;
