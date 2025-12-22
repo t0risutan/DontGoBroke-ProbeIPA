@@ -1,52 +1,58 @@
-<router-outlet></router-outlet>
-
-<header>
+1<header>
+    <button matButton="elevated" class="side-button" (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
     <h1>DontGoBroke!</h1>      
     <button (click)="openExpenseform()" matButton="elevated" class="new-expense-button">+ New Expense</button>
 </header>
 
-<div class="wrapper">
-    <!-- <div class="expense-banner">
-        <div class="expense-banner-content">
-            <h2>Expense Banner</h2>
-            <p>This is the expense banner</p>
-        </div>
-    </div> -->
-    <mat-card class="expense-banner" appearance="outlined">
-        <mat-card-header>
-            <mat-card-title>Welcome to DontGoBroke!</mat-card-title>
-            <mat-card-subtitle>This is the expense banner</mat-card-subtitle>
-        </mat-card-header>
-    </mat-card>
-    <div class="statistic-container">
-        <mat-card class="expense-charts">
-            <div class="expense-chart-content">
-                <h2>Expense Chart</h2>
-                <app-expense-chart></app-expense-chart>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="over">
+        <p>sidenav content</p>
+        <button matButton="elevated" class="side-button" routerLink="/alltransactions">All Transactions</button>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <div class="wrapper">
+            <mat-card class="expense-banner" appearance="outlined">
+                <mat-card-header>
+                    <mat-card-title>Total Expenses: {{ sumExpenses() }} CHF</mat-card-title>
+                    <mat-card-subtitle>of CHF 2000.00 Budget</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <div class="statistic-container">
+                <mat-card class="expense-charts">
+                    <div class="expense-chart-content">
+                        <h2>Expense Chart</h2>
+                        <app-expense-chart></app-expense-chart>
+                    </div>
+                </mat-card>
+                <div class="expense-breakdown">
+                    <div class="expense-breakdown-content">
+                        <h2>Expense Breakdown</h2>
+                        <p>This is the expense breakdown</p>
+                    </div>
+                </div>
             </div>
-        </mat-card>
-        <div class="expense-breakdown">
-            <div class="expense-breakdown-content">
-                <h2>Expense Breakdown</h2>
-                <p>This is the expense breakdown</p>
+            <div class="recent-transactions">
+                <div class="recent-transactions-content">
+                    <mat-list>
+                        <mat-list-item *ngFor="let expense of expenses()">
+                            <mat-card>
+                                <mat-card-header>{{ expense.title }}</mat-card-header> 
+                                <mat-card-content><p>{{ expense.amount }} CHF</p></mat-card-content>
+                                <mat-card-content><p>{{ expense.category }}</p></mat-card-content>
+                                <mat-card-content><p>{{ expense.date }}</p></mat-card-content>
+                                <mat-card-content><p>{{ expense.description }}</p></mat-card-content>
+                                <button (click)="triggerDeleteExpense(expense.id.toString())" matButton="elevated">Delete</button>
+                                <button (click)="triggerEditExpense(expense)" matButton="elevated">Edit</button>
+                            </mat-card>
+                        </mat-list-item>
+                    </mat-list>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="recent-transactions">
-        <div class="recent-transactions-content">
-            <mat-list>
-                <mat-list-item *ngFor="let expense of expenses()">
-                    <mat-card>
-                        <mat-card-header>{{ expense.title }}</mat-card-header> 
-                        <mat-card-content><p>{{ expense.amount }} CHF</p></mat-card-content>
-                        <mat-card-content><p>{{ expense.category }}</p></mat-card-content>
-                        <mat-card-content><p>{{ expense.date }}</p></mat-card-content>
-                        <mat-card-content><p>{{ expense.description }}</p></mat-card-content>
-                        <button (click)="triggerDeleteExpense(expense.id.toString())" matButton="elevated">Delete</button>
-                        <button (click)="triggerEditExpense(expense)" matButton="elevated">Edit</button>
-                    </mat-card>
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </div>
-</div>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+

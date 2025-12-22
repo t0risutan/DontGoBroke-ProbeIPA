@@ -8,6 +8,7 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 header h1 {
@@ -15,14 +16,34 @@ header h1 {
     position: relative;
 }
 
+header button.side-button {
+    justify-items: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+header button.side-button mat-icon {
+    margin: 0;
+}
+
+.sidenav-container {
+    height: 100vh;
+    margin-top: 60px;
+}
+  
+mat-sidenav {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
 .wrapper {
     display: grid;
-
     align-items: center;
     justify-self: center;
     justify-content: center;
     width: 80vw;
-    margin: 50px;
+    margin: 25px 50px 50px 50px;
     top: 0;
 }
 
@@ -38,6 +59,18 @@ header h1 {
     align-items: center;
     position: relative;
     top: 60px;
+}
+
+.expense-banner mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.expense-banner mat-card-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
 }
 
 .statistic-container {

@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { Login } from './login/login';
 import { Dashboard } from './dashboard/dashboard';
-
+import { Alltransactions } from './alltransactions/alltransactions';
 
 export const routes: Routes = [
     {
@@ -18,5 +18,10 @@ export const routes: Routes = [
         path: 'expense-chart',
         loadComponent: () =>
           import('./expense-chart/expense-chart').then((m) => m.ExpenseChart),
+    },
+    {
+        path: 'alltransactions',
+        loadComponent: () =>
+          import('./alltransactions/alltransactions').then((m) => m.Alltransactions),
     },
 ]

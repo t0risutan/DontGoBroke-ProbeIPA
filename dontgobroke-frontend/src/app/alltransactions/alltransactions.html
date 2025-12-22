@@ -1,1 +1,16 @@
-<p>alltransactions works!</p>
+<header>
+    <button matButton="elevated" class="side-button" (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Alle Transaktionen</h1>      
+</header>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side">
+        <p>sidenav content</p>
+        <button matButton="elevated" class="side-button" routerLink="/dashboard">Dashboard</button>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

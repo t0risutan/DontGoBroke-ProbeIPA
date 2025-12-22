@@ -18,4 +18,24 @@ export class DashboardService {
   private dialog = inject(MatDialog);
   private expenseFormService = inject(ExpenseFormService);
 
+
+  expenses = this.expenseFormService.getExpenses();
+
+  sumExpenses = computed(() => {
+    const expenses = this.expenses();
+    return expenses?.reduce((sum, expense) => sum + expense.amount, 0) ?? 0;
+  });
+
+  // sumExpenses = computed(() => {
+  //   const expenseList = this.expenses();
+  //   let sum = 0;
+    
+  //   expenseList?.forEach(expense => {
+  //     if (expense) {
+  //       sum += expense.amount;
+  //     }
+  //   });
+  //   console.log(sum);
+  //   return sum;
+  // });
 }

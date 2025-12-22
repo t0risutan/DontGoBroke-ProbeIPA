@@ -41,7 +41,7 @@ export class ExpenseChart {
       labels: grouped.map(([category, amount]) => category),
       datasets: [{
         data: grouped.map(([category, amount]) => amount),
-        label: 'Expenses',
+        label: 'CHF',
       }]
     };
   });
