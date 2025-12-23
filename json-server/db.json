@@ -18,34 +18,64 @@
   ],
   "expenses": [
     {
+      "id": "6",
       "userId": 0,
-      "title": "Migros Kauf",
-      "amount": 52,
-      "category": "Nahrung",
-      "date": "2025-12-06",
-      "description": "Aktualisierte Ausgabe",
-      "createdAt": "2025-12-19T08:53:55.534Z",
-      "id": "1"
+      "title": "Expense eins",
+      "amount": 89.5,
+      "category": "Unterhaltung",
+      "date": "2025-11-19T23:00:00.000Z",
+      "description": "Neuer controller",
+      "createdAt": "2025-12-22T09:54:32.037Z"
     },
     {
-      "id": "4",
-      "userId": 1,
-      "title": "Coop Einkauf",
-      "amount": 23.8,
-      "category": "Nahrung",
-      "date": "2025-12-03",
-      "description": "Frühstück und Snacks",
-      "createdAt": "2025-12-11"
+      "id": "7",
+      "userId": 0,
+      "title": "Expense zwei",
+      "amount": 50,
+      "category": "Gesundheit/Hygiene",
+      "date": "2025-11-09T23:00:00.000Z",
+      "description": "Gesichtsprodukte",
+      "createdAt": "2025-12-22T09:55:15.301Z"
     },
     {
-      "id": 0,
+      "id": "5956",
       "userId": 0,
-      "title": "Tag8",
-      "amount": 15,
+      "title": "Newest expense",
+      "amount": 56,
       "category": "Shoppen",
-      "date": "2025-12-14T23:00:00.000Z",
-      "description": "hgjhsdydjfxgchsdxcfh",
-      "createdAt": "2025-12-19T08:57:52.407Z"
+      "date": "2025-12-09T23:00:00.000Z",
+      "description": "",
+      "createdAt": "2025-12-22T13:41:41.993Z"
+    },
+    {
+      "id": "4d21",
+      "userId": 0,
+      "title": "new",
+      "amount": 90,
+      "category": "Sonstiges",
+      "date": "2025-10-07T22:00:00.000Z",
+      "description": "wdfadgasdg",
+      "createdAt": "2025-12-22T13:45:09.961Z"
+    },
+    {
+      "id": "5fcf",
+      "userId": 0,
+      "title": "halloweeh",
+      "amount": 32,
+      "category": "Unterhaltung",
+      "date": "2025-10-27T23:00:00.000Z",
+      "description": "decorations",
+      "createdAt": "2025-12-22T13:47:25.016Z"
+    },
+    {
+      "id": "1e9f",
+      "userId": 0,
+      "title": "knabbern",
+      "amount": 16,
+      "category": "Nahrung",
+      "date": "2025-12-18T23:00:00.000Z",
+      "description": "etwas zum schnabulieren",
+      "createdAt": "2025-12-22T13:51:57.327Z"
     }
   ],
   "categories": [
