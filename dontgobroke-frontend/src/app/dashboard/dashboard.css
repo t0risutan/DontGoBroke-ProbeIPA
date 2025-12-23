@@ -1,0 +1,189 @@
+header {
+    background-color: #f0f0f0;
+    height: 60px;
+    padding: 10px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header h1 {
+    left: 60px;
+    position: relative;
+}
+
+header button.side-button {
+    justify-items: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+header button.side-button mat-icon {
+    margin: 0;
+}
+
+.sidenav-container {
+    height: 100vh;
+    margin-top: 60px;
+}
+  
+mat-sidenav {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+}
+
+.wrapper {
+    display: grid;
+    align-items: center;
+    justify-self: center;
+    justify-content: center;
+    width: 80vw;
+    margin: 25px 50px 50px 50px;
+    top: 0;
+}
+
+.expense-banner {
+    background-color: #667eea;
+    width: 80vw;
+    height: 400px;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 60px;
+}
+
+.expense-banner mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+.expense-banner mat-card-subtitle {
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+.statistic-container {
+    width: 80vw;
+    height: 400px;
+    top: 60px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+        "expense-charts expense-breakdown";
+}
+
+.expense-charts {
+    background-color: #f0f0f0;
+    width: 30vw;
+    height: 400px;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    /* justify-self: center; */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.expense-breakdown {
+    background-color: hsl(0, 45%, 71%);
+    width: 30vw;
+    height: 400px;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    /* justify-self: center; */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.recent-transactions {
+    background-color: #f0f0f0;
+    width: 80vw;
+    height: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 100px;
+}
+
+.recent-transactions-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.recent-transactions-content mat-list {
+    width: 100%;
+    position: relative;
+}
+.recent-transactions mat-list-item {
+    list-style: disc;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.recent-transactions mat-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    width: 100%;
+    height: 170px;
+    margin-bottom: 40px;
+}
+button.new-expense-button {
+    background-color: #667eea;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+
+button.delete-expense-button {
+    background-color: #f0f0f0;
+    color: black;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}

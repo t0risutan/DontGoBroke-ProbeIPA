@@ -1,0 +1,40 @@
+<mat-dialog-content>
+    <h2>New Expense</h2>
+    <form>
+        <mat-form-field>
+            <mat-label>Titel</mat-label>
+            <input matInput type="text" placeholder="Titel" [(ngModel)]="expenseForm.title" name="title"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Betrag</mat-label>
+            <input matInput type="number" placeholder="Betrag" [(ngModel)]="expenseForm.amount" name="amount"/>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Kategorie</mat-label>
+            <mat-select [(ngModel)]="expenseForm.category" name="category">
+                <mat-option value="Nahrung">Nahrung</mat-option>
+                <mat-option value="Transport">Transport</mat-option>
+                <mat-option value="Unterkunft">Unterkunft</mat-option>
+                <mat-option value="Unterhaltung">Unterhaltung</mat-option>
+                <mat-option value="Shoppen">Shoppen</mat-option>
+                <mat-option value="Gesundheit/Hygiene">Gesundheit/Hygiene</mat-option>
+                <mat-option value="Bildung">Bildung</mat-option>
+                <mat-option value="Sonstiges">Sonstiges</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Datum</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="expenseForm.date" name="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Beschreibung</mat-label>
+            <textarea matInput type="text" placeholder="Beschreibung" [(ngModel)]="expenseForm.description" name="description"></textarea>
+        </mat-form-field>
+        <button (click)="close()" mat-button="elevated">Abbrechen</button>
+        <button (click)="save()" mat-button="elevated" class="save-button">Speichern</button>
+        <!-- <button (click)="update()" mat-button="elevated" class="update-button">Aktualisieren</button> -->
+    </form>
+</mat-dialog-content>

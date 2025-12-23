@@ -1,0 +1,12 @@
+/* :host {
+    display: grid;
+    grid-column: 1fr;
+} */
+
+form {
+    display: grid;
+    grid-column: 1fr;
+    gap: 10px;
+    padding: 10px;
+}
+  

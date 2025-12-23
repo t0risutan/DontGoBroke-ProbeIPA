@@ -1,0 +1,28 @@
+header {
+    background-color: #f0f0f0;
+    height: 60px;
+    padding: 10px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.sidenav-container {
+    height: 100vh;
+  }
+  
+  mat-sidenav {
+    width: 250px;
+    padding: 20px;
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  /* header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+  } */

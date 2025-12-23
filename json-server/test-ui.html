@@ -1,0 +1,431 @@
+<!-- Diese HTML-Test Datei ist vollständig KI generiert und dient als REST-API Test Tool für die DontGoBroke! API. -->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON-Server CRUD Tester - DontGoBroke!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .btn-get {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-post {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-put {
+            background: #FF9800;
+            color: white;
+        }
+        
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+        
+        .btn-clear {
+            background: #9E9E9E;
+            color: white;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .input-group {
+            margin: 15px 0;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        input, select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .response {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 15px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .status-success {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .status-error {
+            background: #f44336;
+            color: white;
+        }
+        
+        .api-url {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-family: monospace;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 JSON-Server CRUD Tester</h1>
+        <p class="subtitle">DontGoBroke! API Testing Tool - Vorarbeit für ProbeIPA</p>
+        
+        <div class="api-url">
+            📡 API Base URL: <strong>http://localhost:3000</strong>
+        </div>
+
+        <!-- GET ALL EXPENSES -->
+        <div class="section">
+            <h2>📋 GET - Alle Ausgaben abrufen</h2>
+            <div class="button-group">
+                <button class="btn-get" onclick="getAllExpenses()">GET /expenses</button>
+                <button class="btn-get" onclick="getAllCategories()">GET /categories</button>
+                <button class="btn-get" onclick="getAllUsers()">GET /users</button>
+            </div>
+            <div id="response-get" class="response" style="display: none;"></div>
+        </div>
+
+        <!-- GET BY ID -->
+        <div class="section">
+            <h2>🔍 GET - Einzelne Ausgabe nach ID</h2>
+            <div class="input-group">
+                <label>Expense ID:</label>
+                <input type="number" id="get-id" placeholder="z.B. 1" value="1">
+            </div>
+            <div class="button-group">
+                <button class="btn-get" onclick="getExpenseById()">GET /expenses/:id</button>
+            </div>
+            <div id="response-get-id" class="response" style="display: none;"></div>
+        </div>
+
+        <!-- POST - CREATE -->
+        <div class="section">
+            <h2>➕ POST - Neue Ausgabe erstellen</h2>
+            <div class="input-group">
+                <label>Betrag (CHF):</label>
+                <input type="number" id="post-amount" placeholder="45.50" value="25.90" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Kategorie:</label>
+                <select id="post-category">
+                    <option>Nahrung</option>
+                    <option>Transport</option>
+                    <option>Unterkunft</option>
+                    <option>Unterhaltung</option>
+                    <option>Shoppen</option>
+                    <option>Gesundheit/Hygiene</option>
+                    <option>Bildung</option>
+                    <option>Sonstiges</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Datum:</label>
+                <input type="date" id="post-date" value="2025-12-05">
+            </div>
+            <div class="input-group">
+                <label>Beschreibung:</label>
+                <input type="text" id="post-description" placeholder="z.B. Migros Einkauf" value="Test Ausgabe">
+            </div>
+            <div class="button-group">
+                <button class="btn-post" onclick="createExpense()">POST /expenses</button>
+            </div>
+            <div id="response-post" class="response" style="display: none;"></div>
+        </div>
+
+        <!-- PUT - UPDATE -->
+        <div class="section">
+            <h2>✏️ PUT - Ausgabe bearbeiten</h2>
+            <div class="input-group">
+                <label>Expense ID:</label>
+                <input type="number" id="put-id" placeholder="ID zum bearbeiten" value="1">
+            </div>
+            <div class="input-group">
+                <label>Neuer Betrag:</label>
+                <input type="number" id="put-amount" placeholder="99.99" value="99.99" step="0.01">
+            </div>
+            <div class="input-group">
+                <label>Neue Kategorie:</label>
+                <select id="put-category">
+                    <option>Nahrung</option>
+                    <option>Transport</option>
+                    <option>Unterkunft</option>
+                    <option selected>Unterhaltung</option>
+                    <option>Shoppen</option>
+                    <option>Gesundheit/Hygiene</option>
+                    <option>Bildung</option>
+                    <option>Sonstiges</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Neues Datum:</label>
+                <input type="date" id="put-date" value="2025-12-06">
+            </div>
+            <div class="input-group">
+                <label>Neue Beschr.:</label>
+                <input type="text" id="put-description" value="Aktualisierte Ausgabe">
+            </div>
+            <div class="button-group">
+                <button class="btn-put" onclick="updateExpense()">PUT /expenses/:id</button>
+            </div>
+            <div id="response-put" class="response" style="display: none;"></div>
+        </div>
+
+        <!-- DELETE -->
+        <div class="section">
+            <h2>🗑️ DELETE - Ausgabe löschen</h2>
+            <div class="input-group">
+                <label>Expense ID:</label>
+                <input type="number" id="delete-id" placeholder="ID zum löschen" value="2">
+            </div>
+            <div class="button-group">
+                <button class="btn-delete" onclick="deleteExpense()">DELETE /expenses/:id</button>
+            </div>
+            <div id="response-delete" class="response" style="display: none;"></div>
+        </div>
+
+        <!-- CLEAR ALL -->
+        <div class="button-group" style="justify-content: center; margin-top: 30px;">
+            <button class="btn-clear" onclick="clearAll()">🧹 Alle Responses löschen</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:3000';
+
+        // Helper function to display response
+        function displayResponse(elementId, data, status) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            const statusClass = status >= 200 && status < 300 ? 'status-success' : 'status-error';
+            const statusText = status >= 200 && status < 300 ? '✅ SUCCESS' : '❌ ERROR';
+            
+            element.innerHTML = `
+                <span class="status ${statusClass}">${statusText} - Status: ${status}</span>
+                ${JSON.stringify(data, null, 2)}
+            `;
+        }
+
+        // GET all expenses
+        async function getAllExpenses() {
+            try {
+                const response = await fetch(`${API_URL}/expenses`);
+                const data = await response.json();
+                displayResponse('response-get', data, response.status);
+            } catch (error) {
+                displayResponse('response-get', { error: error.message }, 500);
+            }
+        }
+
+        // GET all categories
+        async function getAllCategories() {
+            try {
+                const response = await fetch(`${API_URL}/categories`);
+                const data = await response.json();
+                displayResponse('response-get', data, response.status);
+            } catch (error) {
+                displayResponse('response-get', { error: error.message }, 500);
+            }
+        }
+
+        // GET all users
+        async function getAllUsers() {
+            try {
+                const response = await fetch(`${API_URL}/users`);
+                const data = await response.json();
+                displayResponse('response-get', data, response.status);
+            } catch (error) {
+                displayResponse('response-get', { error: error.message }, 500);
+            }
+        }
+
+        // GET expense by ID
+        async function getExpenseById() {
+            const id = document.getElementById('get-id').value;
+            try {
+                const response = await fetch(`${API_URL}/expenses/${id}`);
+                const data = await response.json();
+                displayResponse('response-get-id', data, response.status);
+            } catch (error) {
+                displayResponse('response-get-id', { error: error.message }, 500);
+            }
+        }
+
+        // POST - Create new expense
+        async function createExpense() {
+            const expense = {
+                userId: 1,
+                amount: parseFloat(document.getElementById('post-amount').value),
+                category: document.getElementById('post-category').value,
+                date: document.getElementById('post-date').value,
+                description: document.getElementById('post-description').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/expenses`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(expense)
+                });
+                const data = await response.json();
+                displayResponse('response-post', data, response.status);
+            } catch (error) {
+                displayResponse('response-post', { error: error.message }, 500);
+            }
+        }
+
+        // PUT - Update expense
+        async function updateExpense() {
+            const id = document.getElementById('put-id').value;
+            const expense = {
+                userId: 1,
+                amount: parseFloat(document.getElementById('put-amount').value),
+                category: document.getElementById('put-category').value,
+                date: document.getElementById('put-date').value,
+                description: document.getElementById('put-description').value
+            };
+
+            try {
+                const response = await fetch(`${API_URL}/expenses/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(expense)
+                });
+                const data = await response.json();
+                displayResponse('response-put', data, response.status);
+            } catch (error) {
+                displayResponse('response-put', { error: error.message }, 500);
+            }
+        }
+
+        // DELETE expense
+        async function deleteExpense() {
+            const id = document.getElementById('delete-id').value;
+            try {
+                const response = await fetch(`${API_URL}/expenses/${id}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                displayResponse('response-delete', data, response.status);
+            } catch (error) {
+                displayResponse('response-delete', { error: error.message }, 500);
+            }
+        }
+
+        // Clear all responses
+        function clearAll() {
+            const responses = document.querySelectorAll('.response');
+            responses.forEach(r => r.style.display = 'none');
+        }
+    </script>
+</body>
+</html>
+
