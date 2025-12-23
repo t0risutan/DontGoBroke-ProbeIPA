@@ -38,7 +38,7 @@ Im Frontend‑Ordner:
 ```bash
 cd dontgobroke-frontend
 npm install
-npm start
+ng serve
 ```
 
 App: `http://localhost:4200/`
