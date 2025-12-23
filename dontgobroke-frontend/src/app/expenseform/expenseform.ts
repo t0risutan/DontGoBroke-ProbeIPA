@@ -52,9 +52,9 @@ export class Expenseform {
   readonly daten = inject<ExpenseDto>(MAT_DIALOG_DATA);
   private expenseFormService = inject(ExpenseFormService);
 
-  
+  // Payload Format für das Formular
   expenseForm: ExpenseDto = {
-    id: this.daten.id || 0,
+    id: this.daten.id,
     userId: this.daten.userId || 0,
     title: this.data.title || '',
     amount: this.data.amount || 0,
@@ -69,11 +69,13 @@ export class Expenseform {
     if (this.expenseForm.id) {
       this.expenseFormService.putExpense(this.expenseForm).subscribe((result) => {
         this.dialogRef.close(result);
+        this.expenseFormService.refresh();
         console.log(result);
       });
     } else {
       this.expenseFormService.postExpense(this.expenseForm).subscribe((result) => {
         this.dialogRef.close(result);
+        this.expenseFormService.refresh();
         console.log(result);
       });
     }

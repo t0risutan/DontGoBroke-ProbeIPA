@@ -1,5 +1,5 @@
 export interface ExpenseDto {
-    id: number
+    id: string
     userId: number
     title: string
     amount: number

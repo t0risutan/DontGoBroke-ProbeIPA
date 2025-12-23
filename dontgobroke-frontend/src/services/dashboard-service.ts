@@ -1,13 +1,11 @@
 import { Component, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { ExpenseDto } from '../models/expense-dto';
-import { Expenseform } from '../app/expenseform/expenseform';
 import { MatDialog } from '@angular/material/dialog';
 import { ExpenseFormService } from './expense-form-service';
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { ExpenseDto } from '../models/expense-dto';
+import { ExpenseChart } from '../app/expense-chart/expense-chart';
+
 
 @Injectable({
   providedIn: 'root',
@@ -15,16 +13,34 @@ import { switchMap } from 'rxjs/operators';
 export class DashboardService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/expenses';
-  private dialog = inject(MatDialog);
   private expenseFormService = inject(ExpenseFormService);
 
+  expenseList = this.expenseFormService.getExpenses();
 
-  expenses = this.expenseFormService.getExpenses();
-
+  // Berechnet Gesamtausgaben ohne Filter
   sumExpenses = computed(() => {
-    const expenses = this.expenses();
+    const expenses = this.expenseList();
     return expenses?.reduce((sum, expense) => sum + expense.amount, 0) ?? 0;
   });
+
+  groupExpensesByCategory(): Map<string, number> {
+    const expenses = this.expenseList();
+    const grouped = new Map<string, number>();
+
+    expenses?.forEach(expense => {
+      if (expense) {
+        const current = grouped.get(expense.category) || 0;
+        grouped.set(expense.category, current + expense.amount);
+      }
+    });
+
+    return grouped;
+  }
+
+  calculateTotal(expenses: ExpenseDto[]): number {
+    return expenses.reduce((sum, expense) => sum + expense.amount, 0);
+  }
+}
 
   // sumExpenses = computed(() => {
   //   const expenseList = this.expenses();
@@ -38,4 +54,4 @@ export class DashboardService {
   //   console.log(sum);
   //   return sum;
   // });
-}
+

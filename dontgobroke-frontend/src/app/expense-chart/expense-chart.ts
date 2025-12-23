@@ -14,7 +14,8 @@ import { DashboardService } from '../../services/dashboard-service';
   styleUrl: './expense-chart.css',
 })
 export class ExpenseChart {
-  @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+  @Input() expenses: ExpenseDto[] = [];
+  // @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
   private expenseFormService = inject(ExpenseFormService);
 
   expensesDetails = this.expenseFormService.getExpenses();

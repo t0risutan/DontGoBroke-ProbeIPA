@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { ExpenseCreateDto, ExpenseDeleteDto, ExpenseDto } from '../models/expense-dto';
 import { HttpClient } from '@angular/common/http';
-import { map, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,16 @@ export class ExpenseFormService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:3000/expenses';
 
+  // Verwendet RX-JS Subject für das Refresh der Daten
+  private refreshTrigger = new Subject<void>();
+  
   getExpenses() {
-    return toSignal(this.http.get<ExpenseDto[]>(this.apiUrl));
+    return toSignal(
+      this.refreshTrigger.pipe(
+        startWith(null),
+        switchMap(() => this.http.get<ExpenseDto[]>(this.apiUrl))
+      )
+    );
   }
 
   postExpense(expense: ExpenseCreateDto) {
@@ -27,5 +36,9 @@ export class ExpenseFormService {
   putExpense(expense: ExpenseDto) {
     const { id, ...expenseWithoutId } = expense;
     return this.http.put<ExpenseDto>(`${this.apiUrl}/${id}`, expenseWithoutId);
+  }
+
+  refresh() {
+    this.refreshTrigger.next();
   }
 }

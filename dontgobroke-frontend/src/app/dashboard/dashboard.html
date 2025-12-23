@@ -16,15 +16,33 @@
         <div class="wrapper">
             <mat-card class="expense-banner" appearance="outlined">
                 <mat-card-header>
-                    <mat-card-title>Total Expenses: {{ sumExpenses() }} CHF</mat-card-title>
+                         
+                    <mat-card-title>Total Expenses: {{ totalExpenses() }} CHF</mat-card-title>
                     <mat-card-subtitle>of CHF 2000.00 Budget</mat-card-subtitle>
                 </mat-card-header>
+                <mat-card-content>
+                    
+                    <div class="date-filter">
+                        <button matButton="elevated" [class.active]="selectedPeriod() === 'day'" (click)="selectedPeriod.set('day')">Day</button>
+                        <button matButton="elevated" [class.active]="selectedPeriod() === 'week'" (click)="selectedPeriod.set('week')">Week</button>
+                        <button matButton="elevated" [class.active]="selectedPeriod() === 'month'" (click)="selectedPeriod.set('month')">Month</button>
+                        <button matButton="elevated" [class.active]="selectedPeriod() === 'year'" (click)="selectedPeriod.set('year')">Year</button>
+                    </div>
+
+                    <mat-form-field>
+                        <mat-label>Choose a date</mat-label>
+                        <input matInput [matDatepicker]="picker" [value]="selectedDate()" (dateChange)="onDateChange($event)">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    
+                </mat-card-content>
             </mat-card>
             <div class="statistic-container">
                 <mat-card class="expense-charts">
                     <div class="expense-chart-content">
                         <h2>Expense Chart</h2>
-                        <app-expense-chart></app-expense-chart>
+                        <app-expense-chart [expenses]="filteredExpenses()"></app-expense-chart>
                     </div>
                 </mat-card>
                 <div class="expense-breakdown">

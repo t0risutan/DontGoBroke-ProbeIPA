@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal, ViewChild } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
@@ -15,6 +15,12 @@ import { MatDrawerContainer } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { DashboardService } from '../../services/dashboard-service';
 import { DecimalPipe } from '@angular/common';
+import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { setSelectedDate } from '../../utils/date-helpers';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,27 +37,46 @@ import { DecimalPipe } from '@angular/common';
     MatIconModule,
     RouterOutlet,
     RouterLink,
-    DecimalPipe
+    DecimalPipe,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatNativeDateModule
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [provideNativeDateAdapter(), MatNativeDateModule] ,
 })
 export class Dashboard {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
   private dialog = inject(MatDialog);
   private expenseFormService = inject(ExpenseFormService);
   private dashboardService = inject(DashboardService);
-  // private deleteExpenseRefresh = new Subject<void>();
-  // readonly expenses$ : Observable<ExpenseDto[]>;
-  // Zuständig für das Abrufen der Ausgaben
 
   sumExpenses = this.dashboardService.sumExpenses;
   expenses = this.expenseFormService.getExpenses();
 
-  // displaySumExpenses() {
-  //   return this.sumExpenses();
-  // }
+  // Datumsstatus 
+  selectedDate = signal(new Date());
+  selectedPeriod = signal<'day' | 'week' | 'month' | 'year'>('month');
+
+  // Gefilterte Ausgaben
+  filteredExpenses = computed(() => {
+    const allExpenses = this.expenses();
+    const daten = this.selectedDate();
+    const period = this.selectedPeriod();
+
+    if (!allExpenses) return [];
+
+    return allExpenses.filter(expense => 
+      setSelectedDate(expense.date, daten, period)
+    );
+  });
+  // Gesamtausgaben gefiltert
+  totalExpenses = computed(() => {
+    return this.filteredExpenses().reduce((sum, expense) => sum + expense.amount, 0);
+  });
 
   toggleSidenav() {
     this.sidenav.toggle();
@@ -66,7 +91,7 @@ export class Dashboard {
 
   triggerDeleteExpense(id: string) {
     this.expenseFormService.deleteExpense(id).subscribe((result) => {
-      return this.expenseFormService.getExpenses();
+      this.expenseFormService.refresh();
       console.log(result);
     });
   }
@@ -83,18 +108,17 @@ export class Dashboard {
      {
       dialogRef.afterClosed().subscribe((result) => {
         console.log(result);
+        if (result) {
+          this.expenseFormService.refresh();
+        }
       });
     };
   };
 
-  // deleteExpense = this.expenseFormService.deleteExpense;
-
-  // Zuständig für das Öffnen des Ausgabenformulars
-
-  // constructor() {
-  //   this.expenses$ = this.deleteExpenseRefresh.pipe(
-  //     startWith(null),
-  //     switchMap(() => ())
-  //   );
-  // }
+  onDateChange(event: any) {
+    const newDate = event.value;
+    if (newDate) {
+      this.selectedDate.set(newDate);
+    }
+  }
 }
